@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import API from "../api/api";
 import Comments from "./Comments";
+import CreatePost from "./CreatePost";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -11,8 +12,15 @@ function Posts() {
       .catch((err) => console.error(err));
   }, []);
 
+  const addPost = (newPost) => {
+    setPosts([newPost, ...posts]);
+  };
+
   return (
     <div>
+    <CreatePost onPostCreated={addPost} />
+
+      <hr />
       <h2>Forum Posts</h2>
       {posts.length === 0 ? (
         <p>No posts yet</p>

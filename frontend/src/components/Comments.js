@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import API from "../api/api";
+import CreateComment from "./CreateComment";
 
 function Comments({ postId }) {
   const [comments, setComments] = useState([]);
@@ -10,9 +11,19 @@ function Comments({ postId }) {
       .catch((err) => console.error(err));
   }, [postId]);
 
+  const addComment = (newComment) => {
+    setComments([...comments, newComment]);
+  };
+
   return (
     <div>
       <h4>Comments</h4>
+      <div>
+      <CreateComment
+        postId={postId}
+        onCommentCreated={addComment}
+      />
+    </div>
       {comments.length === 0 ? (
         <p>No comments yet</p>
       ) : (
