@@ -2,6 +2,7 @@ from rest_framework import generics
 from .models import Comment
 from .serializers import CommentSerializer
 from rest_framework.permissions import IsAuthenticated
+from users.permissions import IsAuthorOrReadOnly
 
 # Create your views here.
 
@@ -22,4 +23,4 @@ class CommentListCreateView(generics.ListCreateAPIView):
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]

@@ -11,6 +11,7 @@ function Login({ setToken }) {
       .then((res) => {
         const token = res.data.token;
         localStorage.setItem("token", token);
+        localStorage.setItem("username", username);
         setToken(token);
         alert("Logged in.");
       })
